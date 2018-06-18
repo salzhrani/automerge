@@ -1,1 +1,17 @@
-{"presets": ["env"]}
+{"presets": [[
+	"env",
+	{
+	  "modules": false
+	}
+  	]],
+	"env": {
+		"cjs":{
+			"presets": [[
+				"env",
+				{
+				"modules": "commonjs"
+				}
+			]]
+		}
+	}
+}

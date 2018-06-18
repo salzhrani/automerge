@@ -2,12 +2,16 @@
   "name": "automerge",
   "version": "0.7.10",
   "description": "Data structures for building collaborative applications",
-  "main": "dist/automerge.js",
+  "browser": "dist/automerge.js",
+  "main": "modules/automerge.js",
+  "module": "es/automerge.js",
   "scripts": {
     "browsertest": "karma start karma.conf.js",
+    "build:cjs": "BABEL_ENV=cjs babel src -d modules",
+    "build:es": "BABEL_ENV=es babel src -d es",
     "test": "mocha",
-    "build": "webpack",
-    "prepublishOnly": "./node_modules/.bin/webpack"
+    "build": "yarn build:cjs && yarn build:es && rollup -c",
+    "prepublishOnly": "rollup -c"
   },
   "author": "",
   "license": "MIT",
@@ -18,8 +22,10 @@
     "uuid": "^3.2.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.7.0",
     "browserify": "^16.2.2",
     "jsverify": "^0.8.3",
@@ -30,8 +36,16 @@
     "karma-mocha": "^1.3.0",
     "karma-sauce-launcher": "^1.2.0",
     "mocha": "^5.2.0",
+    "rollup": "^0.60.7",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-node-resolve": "^3.3.0",
     "sinon": "^5.0.10",
-    "watchify": "^3.11.0",
-    "webpack": "^3.11.0"
-  }
+    "watchify": "^3.11.0"
+  },
+  "files": [
+    "dist",
+    "es",
+    "modules"
+  ]
 }
